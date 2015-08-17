@@ -7,30 +7,43 @@
 (function(){   
 	// Set Template Config
 	var template = {
-		project: 'Basic Theme', // Project Name
 		bootstrap: 'bootstrap-3.3.5-dist', // Version of bootstrap
-		theme: 'theme', // Directory 
+		themeDir: 'theme', // Directory 
+		projectName: 'Basic Theme', // Project Name
+		projectDir: 'basic_theme', //Project Directory
 		log: true // Console log config
 	}
 
-    var init = {
-		setTitle: function(){
-			// Set Project Name
-			document.title = template.project;
-		},
-		// loadBootstrap: function() {
-		// 	// Loading bootstrap
-		// 	file = location.pathname.split( "/" ).pop();
+	// to use bower run the following commands
+	// npm install bower
+	// bower install bootstrap
+	var bower = {
+		useBower: true, // Using bower is optional
+		bowerDir: 'bower_components', // Bower components directory
+		bootstrap: 'bootstrap' //bootstrap Directory inside bower
 
-		// 	link = document.createElement( "link" );
-		// 	link.href = file.substr( 0, file.lastIndexOf( "." ) ) + ".css";
-		// 	link.type = "text/css";
-		// 	link.rel = "stylesheet";
-		// 	link.media = "screen,print";
 
-		// 	document.getElementsByTagName( "head" )[0].appendChild( link );
-		// }
 	}
+
+	
+	// Set title
+	$('head title').append(template.project);
+
+	// Load Bootstrap
+	if (bower.useBower) {
+		$('head').append('<link rel="stylesheet" href="'+bower.bowerDir+'/'+bower.bootstrap+'/dist/css/bootstrap.css" type="text/css" />');
+		if (template.log) {console.log('Bower Bootstrap Loaded: ' + template.bootstrap);};
+	} else {
+		$('head').append('<link rel="stylesheet" href="dist/'+template.bootstrap+'/css/bootstrap.css" type="text/css" />');
+		if (template.log) {console.log('Bootstrap Loaded: ' + template.bootstrap);};
+	};
+	
+	
+	//Load Theme
+	$('head').append('<link rel="stylesheet" href="'+template.themeDir+'/'+template.projectDir+'/css/main.css" type="text/css" />');
+	if (template.log) {console.log('Theme Loaded: ' + template.projectName);};
+
+
 })();
 
 
