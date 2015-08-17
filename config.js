@@ -9,7 +9,7 @@
 	var template = {
 		bootstrap: 'bootstrap-3.3.5-dist', // Version of bootstrap
 		themeDir: 'theme', // Directory 
-		projectName: 'Basic Theme', // Project Name
+		projectName: '', // Project Name
 		projectDir: 'basic_theme', //Project Directory
 		log: true // Console log config
 	}
@@ -27,7 +27,12 @@
 
 	
 	// Set title
-	$('head title').append(template.project);
+	if (template.projectName != '') {
+		$('head title').append(template.projectName);
+	} else {
+		if (template.log) {console.log('Project Name Not Set');};
+	};
+	
 
 	// Load Bootstrap
 	if (bower.useBower) {
